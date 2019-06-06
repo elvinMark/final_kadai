@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #define SIZE 1001 //文字列の長さの限界（'\0'の文字が含まれる）
 
 int main(void){
@@ -10,15 +11,17 @@ int main(void){
   int ref[SIZE+1][SIZE+1];
   //カウンタ：i,j,k
   //str1とstr2の長さ：len1,len2
-  int i,j,len1,len2,k;
+  //len1とlen2の内にどちら低いか : len
+  int i,j,len1,len2,k,len;
   //両方の文字列を読み込む
   scanf("%s",str1);
   scanf("%s",str2);
   //両方の文字列の長さを計算する
   len1 = strlen(str1);
   len2 = strlen(str2);
+  len = len1>len2? len2:len1;
   //行列refを記入する
-  for(i=1;i<=len2;i++){
+  for(i=1;i<=len;i++){
     for(j=i;j<=len1;j++){
       if(str1[j-1]==str2[i-1]) ref[i][j] = ref[i-1][j-1] + 1;
       else ref[i][j] = ref[i-1][j] > ref[i][j-1]? ref[i-1][j] : ref[i][j-1];
